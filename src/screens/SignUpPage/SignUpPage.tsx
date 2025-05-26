@@ -1,4 +1,3 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -46,20 +45,31 @@ export const SignUpPage = () => {
     <div>
       <LogoHeader />
       <div className="min-h-screen bg-[#f9faff] flex items-center justify-center relative pb-[167px]">
-        <div className="w-full max-w-[400px] p-8 bg-white rounded-lg shadow-lg">
-          <h1 className="text-2xl font-bold text-[#242565] mb-6">Sign Up</h1>
-          <p className="my-4 text-left text-[#6a6a6a]">
+        <div
+          className="absolute w-[492.69px] h-[601px] bg-white rounded-bl-[4.93px] 
+        shadow-[0px_9.85px_19.71px_rgba(0,0,0,0.08)] drop-shadow-[0px_0px_4.93px_rgba(0,0,0,0.04)]"
+        >
+          <h1 className="text-[29.56px] font-semibold text-[#242565] mt-[38.18px] ml-[29.56px]">
+            Sign Up
+          </h1>
+          <p className="text-[#8570AD] text-[19.7px] font-medium mt-[20px] ml-[29.56px]">
             Already have an account?{" "}
-            <Button
+            <button
               variant="link"
               onClick={() => navigate("/signin")}
-              className="text-[#4157fe] p-0"
+              className="ml-2 underline text-[#8570AD]"
             >
               Sign In
-            </Button>
+            </button>
           </p>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="absolute left-[29.56px] space-y-6"
+          >
+            <div className="mt-[20px]">
+              <label className="block text-[#242565] font-medium text-[19.08px] mb-2">
+                Full Name
+              </label>
               <Input
                 {...register("name")}
                 placeholder="Full Name"
@@ -73,6 +83,9 @@ export const SignUpPage = () => {
             </div>
 
             <div>
+              <label className="block text-[#242565] font-medium text-[19.08px] mb-2">
+                Email
+              </label>
               <Input
                 {...register("email")}
                 type="email"
@@ -87,6 +100,9 @@ export const SignUpPage = () => {
             </div>
 
             <div>
+              <label className="block text-[#242565] font-medium text-[19.08px] mb-2">
+                Password
+              </label>
               <Input
                 {...register("password")}
                 type="password"
@@ -101,6 +117,9 @@ export const SignUpPage = () => {
             </div>
 
             <div>
+              <label className="block text-[#242565] font-medium text-[19.08px] mb-2">
+                Confirm Password
+              </label>
               <Input
                 {...register("confirmPassword")}
                 type="password"
@@ -116,7 +135,9 @@ export const SignUpPage = () => {
 
             <Button
               type="submit"
-              className="w-full bg-[#4157fe] hover:bg-[#3a4ee6] text-white"
+              className="w-[433.56px] h-[49.27px] mt-[30px] rounded-[7.39px] 
+              bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white 
+              text-[18.91px] font-semibold shadow-[inset_0_-3.62px_1.61px_#4D3DEA,inset_0_3.22px_3.34px_rgba(255,255,255,0.25)]"
             >
               Sign Up
             </Button>
