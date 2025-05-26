@@ -1,38 +1,87 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Footer } from "../../components/Footer";
-
-const adminEvents = [
-  {
-    id: 1,
-    title: "Tech Conference 2025",
-    date: "Sunday, 14 April, 2025",
-    location: "San Francisco, CA",
-    registrations: "130/500",
-  },
-  {
-    id: 2,
-    title: "Startup Meetup",
-    date: "Monday, 20 May, 2025",
-    location: "New York, NY",
-    registrations: "80/200",
-  },
-];
+import { EventFormModal } from "../../components/EventFormModal";
+import { EyeIcon,EditIcon, TrashIcon } from "lucide-react";
 
 export const AdminDashboardPage = () => {
   const navigate = useNavigate();
+  const [events, setEvents] = useState([
+    {
+      id: 1,
+      title: "Tech Conference 2025",
+      date: "Sunday, 14 April, 2025",
+      location: "San Francisco, CA",
+      registrations: "130/500",
+      capacity: 500,
+      description: "A tech conference",
+      time: "09:00 AM - 05:00 PM",
+      tags: ["tech", "conference"],
+    },
+    {
+      id: 2,
+      title: "Startup Meetup",
+      date: "Monday, 20 May, 2025",
+      location: "New York, NY",
+      registrations: "80/200",
+      capacity: 200,
+      description: "A startup meetup",
+      time: "06:00 PM - 09:00 PM",
+      tags: ["startup", "networking"],
+    },
+  ]);
 
-  // Protect route
-  React.useEffect(() => {
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [currentEvent, setCurrentEvent] = useState(null);
+
+  useEffect(() => {
     if (localStorage.getItem("isAdmin") !== "true") {
       navigate("/signin");
     }
   }, [navigate]);
 
+  const handleCreateEvent = (data) => {
+    const newEvent = {
+      ...data,
+      id: events.length + 1,
+      registrations: `0/${data.capacity}`,
+    };
+    setEvents([...events, newEvent]);
+    setIsCreateModalOpen(false);
+  };
+
+  const handleEditEvent = (data) => {
+    const updated = events.map((e) =>
+      e.id === currentEvent.id
+        ? {
+            ...e,
+            ...data,
+            registrations: `${e.registrations?.split("/")[0] || 0}/${
+              data.capacity
+            }`,
+          }
+        : e
+    );
+    setEvents(updated);
+    setIsEditModalOpen(false);
+    setCurrentEvent(null);
+  };
+
+  const handleDeleteEvent = (id) => {
+    if (confirm("Are you sure you want to delete this event?")) {
+      setEvents(events.filter((e) => e.id !== id));
+    }
+  };
+
+  const openEditModal = (event) => {
+    setCurrentEvent(event);
+    setIsEditModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#fafaff]">
-      {/* Header */}
       <header className="w-full h-[60px] bg-[#ffffff1a] backdrop-blur-[32px] flex items-center justify-between px-[102px]">
         <div className="flex items-center gap-[8.09px]">
           <img
@@ -40,12 +89,12 @@ export const AdminDashboardPage = () => {
             alt="Ticket icon"
             src="/vuesax-bold-ticket-2.svg"
           />
-          <div className="[text-shadow:0px_3.89px_3.07px_#8b60dd21] text-[27px] tracking-[-1.35px] leading-[27px] font-gilroy font-bold text-[#240a62] whitespace-nowrap">
+          <div className="text-[27px] tracking-[-1.35px] leading-[27px] font-bold text-[#240a62] whitespace-nowrap">
             Event buddy.
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span className="font-geist font-medium text-base text-[#242565]">
+          <span className="font-medium text-base text-[#242565]">
             Hello, Admin
           </span>
           <Button
@@ -53,7 +102,7 @@ export const AdminDashboardPage = () => {
               localStorage.removeItem("isAdmin");
               navigate("/signin");
             }}
-            className="flex items-center gap-2 px-6 h-[38px] rounded-md bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white font-geist font-semibold text-[15.35px] leading-[16px] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#4D3DEA,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)]"
+            className="flex items-center gap-2 px-6 h-[38px] rounded-md bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white"
           >
             <LogoutIcon />
             <span>Logout</span>
@@ -61,60 +110,92 @@ export const AdminDashboardPage = () => {
         </div>
       </header>
 
-      {/* Content */}
-      <div className="px-[109px] pt-[28px]">
-        <h1 className="text-[36px] font-geist font-medium tracking-[-0.05em] text-[#242565]">
+      <div className="px-[109px] pt-[28px] flex-grow">
+        <h1 className="text-[36px] font-medium tracking-[-0.05em] text-[#242565]">
           Admin Dashboard
         </h1>
-        <p className="mt-4 text-[20.26px] font-geist font-normal leading-[131%] tracking-[-0.02em] text-[#8570AD]">
+        <p className="mt-4 text-[20.26px] text-[#8570AD]">
           Manage events, view registrations, and monitor your platform.
         </p>
+
         <div className="flex justify-between items-center mt-[60px] mb-2">
-          <h2 className="text-[24px] font-geist font-medium tracking-[-0.05em] text-[#242565]">
+          <h2 className="text-[24px] font-medium tracking-[-0.05em] text-[#242565]">
             Events Management
           </h2>
-          <Button className="w-[114px] h-[38px] bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white font-geist font-semibold text-[15.35px] leading-[104.3%] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#4D3DEA,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)] rounded-md">
+          <Button
+            onClick={() => setIsCreateModalOpen(true)}
+            className="w-[114px] h-[38px] bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white font-geist font-semibold text-[15.35px] leading-[104.3%] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#4D3DEA,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)] rounded-md"
+          >
             Create Event
           </Button>
         </div>
-        {/* Table Header */}
-        <div className="w-full bg-white border-b border-[#E6E6E6] rounded-t-lg flex items-center px-4 py-3 font-geist text-[#242565] text-[14px] font-medium">
-          <div className="flex-[3]">Title</div>
-          <div className="flex-[3]">Date</div>
-          <div className="flex-[2]">Location</div>
-          <div className="flex-[2]">Registrations</div>
-          <div className="flex-[1]">Actions</div>
-        </div>
-        {/* Table Rows */}
-        {adminEvents.map((event) => (
-          <div
-            key={event.id}
-            className="w-full bg-white border-b border-[#E6E6E6] flex items-center px-4 py-3 font-geist text-[#242565] text-[14px]"
-          >
-            <div className="flex-[3]">{event.title}</div>
-            <div className="flex-[3]">{event.date}</div>
-            <div className="flex-[2]">{event.location}</div>
-            <div className="flex-[2]">{event.registrations}</div>
-            <div className="flex-[1] flex gap-4">
-              <button title="View">
-                <EyeIcon />
-              </button>
-              <button title="Edit">
-                <EditIcon />
-              </button>
-              <button title="Delete">
-                <TrashIcon />
-              </button>
-            </div>
+
+        <div className="overflow-x-auto rounded-lg shadow mb-8">
+          <div className="w-full bg-white border-b border-[#E6E6E6] rounded-t-lg flex items-center px-4 py-3 font-medium text-[#242565] text-[14px]">
+            <div className="flex-[3]">Title</div>
+            <div className="flex-[3]">Date</div>
+            <div className="flex-[2]">Location</div>
+            <div className="flex-[2]">Registrations</div>
+            <div className="flex-[1]">Actions</div>
           </div>
-        ))}
+          {events.length > 0 ? (
+            events.map((event) => (
+              <div
+                key={event.id}
+                className="w-full bg-white border-b border-[#E6E6E6] flex items-center px-4 py-3 text-[#242565] text-[14px]"
+              >
+                <div className="flex-[3]">{event.title}</div>
+                <div className="flex-[3]">{event.date}</div>
+                <div className="flex-[2]">{event.location}</div>
+                <div className="flex-[2]">{event.registrations}</div>
+                <div className="flex-[1] flex gap-4">
+                  <button title="View">
+                    <EyeIcon />
+                  </button>
+                  <button title="Edit" onClick={() => openEditModal(event)}>
+                    <EditIcon />
+                  </button>
+                  <button
+                    title="Delete"
+                    onClick={() => handleDeleteEvent(event.id)}
+                  >
+                    <TrashIcon color="#FF0E12" />
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="w-full bg-white py-6 text-center text-gray-500">
+              No events found. Create your first event to get started.
+            </div>
+          )}
+        </div>
       </div>
+
+      <EventFormModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onSubmit={handleCreateEvent}
+        title="Create New Event"
+      />
+
+      <EventFormModal
+        isOpen={isEditModalOpen}
+        onClose={() => {
+          setIsEditModalOpen(false);
+          setCurrentEvent(null);
+        }}
+        onSubmit={handleEditEvent}
+        event={currentEvent}
+        title="Edit Event"
+        isEditing
+      />
+
       <Footer />
     </div>
   );
 };
 
-// SVG Icon Components
 const LogoutIcon = () => (
   <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
     <path
@@ -140,43 +221,4 @@ const LogoutIcon = () => (
     />
   </svg>
 );
-const EyeIcon = () => (
-  <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
-    <ellipse cx="10" cy="10" rx="7" ry="4" stroke="#242565" strokeWidth="1.5" />
-    <circle cx="10" cy="10" r="2" stroke="#242565" strokeWidth="1.5" />
-  </svg>
-);
-const EditIcon = () => (
-  <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
-    <rect
-      x="4"
-      y="13"
-      width="12"
-      height="3"
-      rx="1"
-      stroke="#242565"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M13.5 6.5L15 8L8 15H6.5V13.5L13.5 6.5Z"
-      stroke="#242565"
-      strokeWidth="1.5"
-    />
-  </svg>
-);
-const TrashIcon = () => (
-  <svg width="20" height="20" fill="none" viewBox="0 0 20 20">
-    <rect
-      x="5"
-      y="7"
-      width="10"
-      height="8"
-      rx="2"
-      stroke="#FF0E12"
-      strokeWidth="1.5"
-    />
-    <path d="M8 9V13" stroke="#FF0E12" strokeWidth="1.5" />
-    <path d="M12 9V13" stroke="#FF0E12" strokeWidth="1.5" />
-    <path d="M3 7H17" stroke="#FF0E12" strokeWidth="1.5" />
-  </svg>
-);
+

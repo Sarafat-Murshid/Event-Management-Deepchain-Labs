@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Pagination,
   PaginationContent,
@@ -6,12 +5,8 @@ import {
   PaginationLink,
 } from "../../components/ui/pagination";
 import { EventCardSection } from "./sections/EventCardSection";
-import { EventSearchSection } from "./sections/EventSearchSection/EventSearchSection";
-import { EventsWrapperSection } from "./sections/EventsWrapperSection";
 import { HeaderSection } from "./sections/HeaderSection/HeaderSection";
 import { HeroSection } from "./sections/HeroSection/HeroSection";
-import { PreviousEventsWrapperSection } from "./sections/PreviousEventsWrapperSection/PreviousEventsWrapperSection";
-import { UpcomingEventsSection } from "./sections/UpcomingEventsSection";
 import { Footer } from "../../components/Footer";
 
 export const LandingPage = (): JSX.Element => {

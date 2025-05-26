@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import { useAuth } from "../../contexts/AuthContext";
 import { CalendarIcon, ClockIcon, MapPinIcon } from "lucide-react";
 import { Footer } from "../../components/Footer";
+import { HeaderSection } from "../LandingPage/sections/HeaderSection/HeaderSection";
 
 export const EventDetailsPage = () => {
   const { id } = useParams();
@@ -45,42 +46,10 @@ Whether you're an aspiring developer, a seasoned engineer, or just curious about
   };
 
   return (
-    <div className="min-h-screen bg-[#f9faff] relative pb-[167px]">
+    <div className="min-h-screen flex flex-col bg-[#f9faff]">
       {/* Header */}
-      <header className="w-full h-[60px] bg-white shadow-sm flex items-center justify-between px-8">
-        <div className="flex items-center gap-2">
-          <img
-            className="w-[27px] h-[27px]"
-            alt="Ticket icon"
-            src="/vuesax-bold-ticket-2.svg"
-          />
-          <span className="text-[27px] font-bold text-[#240a62]">
-            Event buddy.
-          </span>
-        </div>
-
-        <div className="flex items-center gap-4">
-          {user ? (
-            <span className="text-[#242565]">Welcome, {user.name}</span>
-          ) : (
-            <div className="flex gap-2">
-              <Button
-                onClick={() => navigate("/signin")}
-                variant="outline"
-                className="bg-[#4157fe] text-white hover:bg-[#3a4ee6]"
-              >
-                Sign in
-              </Button>
-              <Button
-                onClick={() => navigate("/signup")}
-                variant="outline"
-                className="bg-[#4157fe] text-white hover:bg-[#3a4ee6]"
-              >
-                Sign up
-              </Button>
-            </div>
-          )}
-        </div>
+      <header>
+        <HeaderSection />
       </header>
 
       {/* Main Content */}
@@ -166,7 +135,9 @@ Whether you're an aspiring developer, a seasoned engineer, or just curious about
                 onClick={handleBooking}
                 className="w-full bg-[#4157fe] text-white hover:bg-[#3a4ee6]"
               >
-                {user ? `Book ${selectedSeats} Seat${selectedSeats > 1 ? "s" : ""}` : "Sign in to Book"}
+                {user
+                  ? `Book ${selectedSeats} Seat${selectedSeats > 1 ? "s" : ""}`
+                  : "Sign in to Book"}
               </Button>
 
               <p className="text-center text-[#6a6a6a] mt-4">
