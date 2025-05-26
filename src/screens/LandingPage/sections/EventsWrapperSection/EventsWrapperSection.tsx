@@ -5,7 +5,6 @@ import { Card, CardContent } from "../../../../components/ui/card";
 import { Separator } from "../../../../components/ui/separator";
 
 export const EventsWrapperSection = (): JSX.Element => {
-  // Event data for easy maintenance
   const eventData = {
     image: "/pic-8.png",
     date: {

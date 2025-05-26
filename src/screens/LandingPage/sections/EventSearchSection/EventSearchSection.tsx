@@ -5,7 +5,6 @@ import { Card, CardContent } from "../../../../components/ui/card";
 import { Separator } from "../../../../components/ui/separator";
 
 export const EventSearchSection = (): JSX.Element => {
-  // Event data
   const eventData = {
     image: "/pic-8.png",
     month: "APR",

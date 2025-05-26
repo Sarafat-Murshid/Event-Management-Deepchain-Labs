@@ -8,7 +8,6 @@ import { Select } from "./ui/select";
 import { Button } from "./ui/button";
 import { Event } from "../types/Event";
 
-// Schema for form validation
 const eventFormSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
   date: z.string().min(1, { message: "Date is required" }),
@@ -66,7 +65,6 @@ export function EventForm({
     event?.imageUrl || null
   );
 
-  // Capacity options
   const capacityOptions = Array.from({ length: 20 }, (_, i) => {
     const value = (i + 1) * 50;
     return { value: value.toString(), label: value.toString() };

@@ -14,17 +14,14 @@ export const LandingPage = (): JSX.Element => {
   const navigate = useNavigate();
   const now = new Date();
 
-  // Pagination state
   const [upcomingPage, setUpcomingPage] = useState(1);
   const [pastPage, setPastPage] = useState(1);
 
-  // Filtered events
   const upcomingEventsAll = events.filter(
     (event) => new Date(event.date) >= now
   );
   const pastEventsAll = events.filter((event) => new Date(event.date) < now);
 
-  // Pagination logic
   const totalUpcomingPages = Math.ceil(
     upcomingEventsAll.length / UPCOMING_PER_PAGE
   );
@@ -45,7 +42,6 @@ export const LandingPage = (): JSX.Element => {
       <HeaderSection />
       <HeroSection />
       <div className="flex-1 w-full max-w-[1440px] mx-auto">
-        {/* Upcoming Events Section */}
         <section className="mt-16 px-8 md:px-[104px]">
           <h2 className="font-geist font-medium text-[#242565] text-4xl tracking-[-0.05em] leading-9 mb-8">
             Upcoming Events
@@ -80,7 +76,6 @@ export const LandingPage = (): JSX.Element => {
           )}
         </section>
 
-        {/* Previous Events Section */}
         <section className="mt-20 px-8 md:px-[100px] mb-16">
           <h2 className="font-geist font-medium text-[#242565] text-4xl tracking-[-0.05em] leading-9 mb-8">
             Previous Events

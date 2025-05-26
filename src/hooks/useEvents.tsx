@@ -4,7 +4,6 @@ import type { Event } from "../types/Event";
 export function useEvents() {
   const [events, setEvents] = useState<Event[]>([]);
 
-  // Load from localStorage or public/events.json on first mount
   useEffect(() => {
     const stored = localStorage.getItem("events");
     if (stored) {
@@ -16,8 +15,7 @@ export function useEvents() {
         .catch(() => setEvents([]));
     }
   }, []);
-
-  // Save to localStorage on every change
+ 
   useEffect(() => {
     localStorage.setItem("events", JSON.stringify(events));
   }, [events]);

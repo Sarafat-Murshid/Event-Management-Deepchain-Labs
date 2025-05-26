@@ -3,7 +3,6 @@ import React from "react";
 import { Separator } from "../../../../components/ui/separator";
 
 export const PreviousEventsSection = (): JSX.Element => {
-  // Navigation links data
   const navLinks = [
     { title: "Home", href: "#" },
     { title: "Sign in", href: "#" },
@@ -15,7 +14,6 @@ export const PreviousEventsSection = (): JSX.Element => {
     <footer className="w-full bg-[#eceeff] py-8 px-6">
       <div className="container mx-auto max-w-[1226px]">
         <div className="flex justify-between items-center mb-6">
-          {/* Logo and brand name */}
           <div className="flex items-center gap-2">
             <TicketIcon className="w-7 h-7" />
             <div className="[text-shadow:0px_4.04px_3.19px_#8b60dd21] text-[28px] tracking-[-1.40px] leading-7 [font-family:'Gilroy-Bold-Bold',Helvetica] font-bold text-[#240a62]">
@@ -23,7 +21,6 @@ export const PreviousEventsSection = (): JSX.Element => {
             </div>
           </div>
 
-          {/* Navigation links */}
           <nav className="flex items-center gap-4">
             {navLinks.map((link, index) => (
               <a
@@ -37,10 +34,8 @@ export const PreviousEventsSection = (): JSX.Element => {
           </nav>
         </div>
 
-        {/* Divider line */}
         <Separator className="bg-gray-300 my-4" />
 
-        {/* Copyright text */}
         <div className="text-center mt-6">
           <p className="[font-family:'Geist',Helvetica] font-medium text-[#6a6a6a] text-sm tracking-[-0.70px] leading-[14.6px]">
             © 2025 Event buddy. All rights reserved.

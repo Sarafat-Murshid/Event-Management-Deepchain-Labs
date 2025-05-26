@@ -3,7 +3,7 @@ import { EventCard } from "./EventCard";
 
 type Props = {
   events: Event[];
-  columns?: string; // e.g. "grid-cols-3"
+  columns?: string; 
   onCardClick?: (event: Event) => void;
 };
 

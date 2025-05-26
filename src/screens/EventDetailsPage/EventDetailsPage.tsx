@@ -32,7 +32,6 @@ export const EventDetailsPage = () => {
 
   const dateObj = new Date(event.date);
 
-  // Tag normalization with fallback to 3 manual tags
   const tags =
     Array.isArray(event.tags) && event.tags.length > 0
       ? event.tags.map((t) =>
@@ -46,7 +45,6 @@ export const EventDetailsPage = () => {
           { name: "AI", color: "#4157FE" },
         ];
 
-  // Choose the image URL to use
   const eventImage =
     event.imageUrl ||
     event.image ||
@@ -54,13 +52,10 @@ export const EventDetailsPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f9faff]">
-      {/* Header */}
       <HeaderSection />
 
-      {/* Main Content */}
       <main className="flex-1 flex flex-col items-center justify-start w-full">
         <div className="relative w-full max-w-[1440px] min-h-[2056px] mx-auto">
-          {/* Back to event */}
           <div
             className="absolute left-[105px] top-[88px] flex items-end gap-2 cursor-pointer"
             onClick={() => navigate(-1)}
@@ -100,7 +95,6 @@ export const EventDetailsPage = () => {
             </span>
           </div>
 
-          {/* Event Image */}
           <div
             className="absolute left-[104px] top-[136px] w-[1232px] h-[585px] rounded-[8px] overflow-hidden bg-white"
             style={{
@@ -116,7 +110,6 @@ export const EventDetailsPage = () => {
             )}
           </div>
 
-          {/* Tags */}
           {tags.length > 0 && (
             <div className="absolute flex flex-row gap-[9px] left-[104px] top-[753px] z-10">
               {tags.map((tag, idx) => (
@@ -144,14 +137,11 @@ export const EventDetailsPage = () => {
             </div>
           )}
 
-          {/* Title */}
           <h1 className="absolute left-[104px] top-[806px] font-geist font-medium text-[36px] leading-[43px] tracking-[-0.05em] text-[#242565]">
             {event.title}
           </h1>
 
-          {/* Info Card */}
           <div className="absolute left-[104px] top-[878px] w-[1232px] h-[87px] bg-white border border-[rgba(189,187,251,0.35)] rounded-[12px] flex flex-row items-center">
-            {/* Date */}
             <div className="flex flex-row items-center gap-[12px] ml-[28px] w-[205px] h-[48px]">
               <div className="flex items-center justify-center w-[44px] h-[44px]">
                 <CalendarIcon className="w-[44px] h-[44px] text-[#1D4ED8]" />
@@ -170,7 +160,6 @@ export const EventDetailsPage = () => {
                 </div>
               </div>
             </div>
-            {/* Time */}
             <div className="flex flex-row items-center gap-[12px] mx-auto w-[172px] h-[48px]">
               <div className="flex items-center justify-center w-[34px] h-[34px]">
                 <ClockIcon className="w-[34px] h-[34px] text-[#1D4ED8]" />
@@ -184,7 +173,6 @@ export const EventDetailsPage = () => {
                 </div>
               </div>
             </div>
-            {/* Location */}
             <div className="flex flex-row items-center gap-[12px] ml-auto mr-[28px] w-[169px] h-[48px]">
               <div className="flex items-center justify-center w-[34px] h-[34px]">
                 <MapPinIcon className="w-[34px] h-[34px] text-[#1D4ED8]" />
@@ -200,7 +188,6 @@ export const EventDetailsPage = () => {
             </div>
           </div>
 
-          {/* Select Number of Seats */}
           <div className="absolute left-1/2 -translate-x-1/2 top-[993px] w-[920px] h-[323px] bg-white border border-[rgba(189,187,251,0.35)] rounded-[12px]">
             <div className="absolute left-[26px] top-[26px] font-geist font-medium text-[24px] leading-[29px] tracking-[-0.05em] text-[#242565]">
               Select Number of Seats
@@ -238,7 +225,6 @@ export const EventDetailsPage = () => {
             </div>
           </div>
 
-          {/* About this event */}
           <div className="absolute left-[105px] top-[1362px] font-geist font-medium text-[24px] leading-[29px] tracking-[-0.05em] text-[#242565]">
             About this event
           </div>
@@ -246,7 +232,6 @@ export const EventDetailsPage = () => {
             {event.description}
           </div>
 
-          {/* Spots left */}
           <div className="absolute left-[104px] top-[1797px] flex flex-row items-center gap-[11px] w-[504px] h-[59px]">
             <ChairIcon className="w-[38px] h-[38px]" />
             <span className="font-geist font-medium text-[25.44px] leading-[38px] tracking-[-0.05em] text-[#8570AD]">
@@ -255,12 +240,10 @@ export const EventDetailsPage = () => {
             </span>
           </div>
 
-          {/* Divider */}
           <div className="absolute left-[103px] top-[1788px] w-[1233px] border-t border-[#F1F0F9]" />
         </div>
       </main>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

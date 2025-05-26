@@ -14,8 +14,6 @@ export const DashboardPage = () => {
     return null;
   }
 
-  // Filter events based on user's registrations if you track them
-  // For now, show all upcoming events as an example:
   const now = new Date();
   const registeredEvents = events.filter(
     (event) => new Date(event.date) >= now
@@ -23,7 +21,6 @@ export const DashboardPage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#fafaff]">
-      {/* Header */}
       <header className="w-full h-[60px] bg-[#ffffff1a] backdrop-blur-[32px] flex items-center justify-between px-[102px]">
         <button
           className="flex items-center gap-[8.09px] focus:outline-none"
@@ -90,8 +87,7 @@ export const DashboardPage = () => {
           </Button>
         </div>
       </header>
-
-      {/* Dashboard Content */}
+    
       <div className="px-[104px] pt-[28px]">
         <h1 className="text-[36px] font-geist font-medium tracking-[-0.05em] text-[#242565]">
           Dashboard
@@ -127,7 +123,6 @@ export const DashboardPage = () => {
                   onClick={() => navigate(`/events/${event.id}`)}
                   className="w-full h-[123px] bg-white border border-[#BDBBFB59] rounded-xl px-6 py-[22px] flex items-center cursor-pointer"
                 >
-                  {/* Date Display */}
                   <div className="mr-8 text-center">
                     <div className="text-[24.55px] font-geist font-bold text-[#3D37F1] tracking-[-0.05em]">
                       {month}
@@ -136,8 +131,7 @@ export const DashboardPage = () => {
                       {day}
                     </div>
                   </div>
-
-                  {/* Event Details */}
+                 
                   <div className="flex-1">
                     <h3 className="text-[20px] font-geist font-medium leading-[120%] tracking-[-0.05em] text-[#242565] mb-5">
                       {event.title}
@@ -157,12 +151,10 @@ export const DashboardPage = () => {
                       </div>
                     </div>
                   </div>
-
-                  {/* Cancel Registration Button */}
+              
                   <Button
                     onClick={(e) => {
                       e.stopPropagation();
-                      // Handle cancellation
                     }}
                     className="w-[156px] h-[38px] bg-gradient-to-b from-[#FF847B] to-[#FE4141] text-white font-geist font-semibold text-[15.35px] leading-[104.3%] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#EA3D3D,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)] rounded-md"
                   >
@@ -189,7 +181,6 @@ export const DashboardPage = () => {
   );
 };
 
-// Icon components
 const CalendarIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 18 18" fill="none">
     <path

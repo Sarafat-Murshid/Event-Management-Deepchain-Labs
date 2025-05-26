@@ -7,7 +7,6 @@ export const HeroSection = (): JSX.Element => {
   return (
     <section className="relative w-full h-[613px] bg-white overflow-hidden">
       <div className="relative w-full h-full max-w-[2412px] mx-auto">
-        {/* Background elements */}
         <div className="absolute w-full h-[1167px] top-[292px] left-1/2 -translate-x-1/2 opacity-70">
           <div className="relative h-[1069px] top-[-60px]">
             <div className="absolute w-[1814px] h-[405px] top-[255px] left-[22px] bg-[#4157fe] rounded-[906.81px/202.74px] rotate-[-12.71deg] blur-[308.42px]" />
@@ -20,12 +19,10 @@ export const HeroSection = (): JSX.Element => {
           </div>
         </div>
 
-        {/* Decorative circles */}
         <div className="absolute w-[790px] h-[790px] top-[315px] right-[294px] rounded-[395.18px] border-[0.95px] border-solid border-white" />
         <div className="absolute w-[1075px] h-[1075px] top-[173px] right-[361px] rounded-[537.67px] border-[0.95px] border-solid border-[#ffffffcc]" />
         <div className="absolute w-[1421px] h-[1421px] top-0 right-[216px] rounded-[710.56px] border-[0.95px] border-solid border-[#ffffff99]" />
 
-        {/* Decorative elements */}
         <img
           className="absolute w-[142px] h-[142px] top-[313px] left-[111px]"
           alt="Group"
@@ -37,7 +34,6 @@ export const HeroSection = (): JSX.Element => {
           src="/group-1000011119.png"
         />
 
-        {/* Main content */}
         <div className="absolute top-[116px] left-1/2 -translate-x-1/2 flex flex-col items-center max-w-[849px] text-center">
           <h1 className="text-[78.5px] tracking-[-3.93px] leading-[78.5px] font-medium text-[#240a62] [text-shadow:0px_12.69px_10.03px_#8b60dd21] [font-family:'Geist',Helvetica]">
             Discover
@@ -74,7 +70,6 @@ export const HeroSection = (): JSX.Element => {
           </div>
         </div>
 
-        {/* Decorative ticket 1 */}
         <div className="absolute w-[225px] h-[101px] top-[158px] left-[111px] rotate-[-11.35deg] shadow-[0px_9.38px_18.76px_#00000014,0px_0px_4.69px_#0000000a]">
           <div className="relative w-[262px] h-[187px] top-[-43px] left-[-19px]">
             <img
@@ -130,7 +125,6 @@ export const HeroSection = (): JSX.Element => {
           </div>
         </div>
 
-        {/* Decorative ticket 2 */}
         <div className="absolute w-[199px] h-[89px] top-[158px] right-[111px] rotate-[20.67deg] shadow-[0px_8px_16px_#00000014,0px_0px_4px_#0000000a]">
           <div className="relative w-64 h-[219px] top-[-65px] left-[-29px]">
             <img

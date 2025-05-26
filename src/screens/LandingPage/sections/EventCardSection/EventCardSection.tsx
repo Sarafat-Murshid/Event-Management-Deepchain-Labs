@@ -8,14 +8,12 @@ import { ChairIcon } from './../../../../components/icons/ChairIcon';
 export const EventCardSection = (): JSX.Element => {
   const navigate = useNavigate();
 
-  // Event tags data
   const tags = [
     { name: "Tech", color: "blue-700" },
     { name: "Conference", color: "blue-700" },
     { name: "AI", color: "blue-700" },
   ];
 
-  // Event details data
   const eventDetails = [
     { icon: <CalendarIcon className="w-[18px] h-[18px]" />, text: "Sunday" },
     { icon: <ClockIcon className="w-[18px] h-[18px]" />, text: "3-5 PM" },

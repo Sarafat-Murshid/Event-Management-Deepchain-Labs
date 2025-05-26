@@ -14,7 +14,7 @@ type Event = {
   description?: string;
   location: string;
   image?: string;
-  tags?: string[]; // or { name: string }[]
+  tags?: string[]; 
   capacity?: number;
   spotsLeft?: number;
 };
@@ -25,14 +25,13 @@ type Props = {
 };
 
 export function EventCard({ event, onClick }: Props) {
-  // Date parsing
+
   const dateObj = new Date(event.date);
   const month = dateObj
     .toLocaleString("default", { month: "short" })
     .toUpperCase();
   const day = dateObj.getDate();
-
-  // Tag normalization
+ 
   const tags =
     Array.isArray(event.tags) && event.tags.length > 0
       ? event.tags.map((t) =>
@@ -44,7 +43,6 @@ export function EventCard({ event, onClick }: Props) {
           { name: "AI", color: "#4157FE" },
         ];
 
-  // Spots/capacity fallback
   const spotsLeft =
     typeof event.spotsLeft === "number"
       ? event.spotsLeft
@@ -68,7 +66,6 @@ export function EventCard({ event, onClick }: Props) {
 
       <CardContent className="p-4">
         <div className="flex items-center gap-[19px] mt-2">
-          {/* Date Badge */}
           <div className="relative w-7 h-[42px] flex-shrink-0">
             <div className="absolute w-[26px] top-0 left-0 font-bold text-[#3d37f1] text-[13px] text-center tracking-[-0.65px] leading-normal [font-family:'Geist',Helvetica]">
               {month}

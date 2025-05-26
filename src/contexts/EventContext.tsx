@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import type { Event } from "../types/Event"; // Use your global Event type
+import type { Event } from "../types/Event";
 
 type EventContextType = {
   events: Event[];

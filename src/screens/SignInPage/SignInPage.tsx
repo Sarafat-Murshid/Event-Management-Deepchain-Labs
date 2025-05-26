@@ -26,9 +26,7 @@ export const SignInPage = () => {
   });
 
   const onSubmit = async (data: SignInFormData) => {
-    // Hardcoded admin credentials
     if (data.email === "admin@event.com" && data.password === "admin123") {
-      // Set admin flag in your auth context or localStorage
       localStorage.setItem("isAdmin", "true");
       navigate("/admin-dashboard");
       return;

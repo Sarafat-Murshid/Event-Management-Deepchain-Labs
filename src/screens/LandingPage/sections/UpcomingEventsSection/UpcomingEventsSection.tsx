@@ -5,10 +5,8 @@ import { Card, CardContent } from "../../../../components/ui/card";
 import { Separator } from "../../../../components/ui/separator";
 
 export const UpcomingEventsSection = (): JSX.Element => {
-  // Event tags data
   const eventTags = [{ name: "Tech" }, { name: "Conference" }, { name: "AI" }];
 
-  // Event details data
   const eventDetails = [
     { icon: <CalendarIcon className="w-[18px] h-[18px]" />, text: "Sunday" },
     { icon: <ClockIcon className="w-[18px] h-[18px]" />, text: "3-5 PM" },

@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { useAuth } from "../../contexts/AuthContext";
 import { LogoHeader } from "../../components/LogoHeader";
@@ -147,7 +146,6 @@ export const SignUpPage = () => {
                   paddingRight: "29.56px",
                 }}
               >
-                {/* Name Field */}
                 <div style={{ width: "433.56px" }}>
                   <label
                     style={{
@@ -172,7 +170,6 @@ export const SignUpPage = () => {
                     </p>
                   )}
                 </div>
-                {/* Email Field */}
                 <div style={{ width: "433.56px" }}>
                   <label
                     style={{
@@ -198,7 +195,6 @@ export const SignUpPage = () => {
                     </p>
                   )}
                 </div>
-                {/* Password Field */}
                 <div style={{ width: "433.56px" }}>
                   <label
                     style={{
@@ -224,7 +220,6 @@ export const SignUpPage = () => {
                     </p>
                   )}
                 </div>
-                {/* Submit Button */}
                 <button
                   type="submit"
                   style={{
