@@ -161,7 +161,7 @@ export const DashboardPage = () => {
 
           <div className="mt-8 flex justify-center">
             <Button
-              onClick={() => navigate("/events")}
+              onClick={() => navigate("/")}
               className="w-[168px] h-[38px] bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white font-geist font-semibold text-[15.35px] leading-[104.3%] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#4D3DEA,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)] rounded-md"
             >
               Browse more events

@@ -48,7 +48,16 @@ export const SignUpPage = () => {
       <div className="min-h-screen bg-[#f9faff] flex items-center justify-center relative pb-[167px]">
         <div className="w-full max-w-[400px] p-8 bg-white rounded-lg shadow-lg">
           <h1 className="text-2xl font-bold text-[#242565] mb-6">Sign Up</h1>
-
+          <p className="my-4 text-left text-[#6a6a6a]">
+            Already have an account?{" "}
+            <Button
+              variant="link"
+              onClick={() => navigate("/signin")}
+              className="text-[#4157fe] p-0"
+            >
+              Sign In
+            </Button>
+          </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <Input
@@ -112,17 +121,6 @@ export const SignUpPage = () => {
               Sign Up
             </Button>
           </form>
-
-          <p className="mt-4 text-center text-[#6a6a6a]">
-            Already have an account?{" "}
-            <Button
-              variant="link"
-              onClick={() => navigate("/signin")}
-              className="text-[#4157fe] p-0"
-            >
-              Sign In
-            </Button>
-          </p>
         </div>
       </div>
     </div>

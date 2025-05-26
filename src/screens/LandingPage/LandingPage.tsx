@@ -28,7 +28,7 @@ export const LandingPage = (): JSX.Element => {
   return (
     <div className="min-h-screen flex flex-col bg-[#f9faff]">
       {/* Header stays centered */}
-      <div className="w-full max-w-[1440px] mx-auto">
+      <div>
         <HeaderSection />
       </div>
       {/* Hero section is now full width */}
