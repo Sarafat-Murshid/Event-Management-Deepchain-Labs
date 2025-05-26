@@ -7,6 +7,8 @@ import { Textarea } from "./ui/textarea";
 import { Select } from "./ui/select";
 import { Button } from "./ui/button";
 import { Event } from "../types/Event";
+import { ClockIcon } from "./icons/ClockIcon";
+import { CalendarIcon } from "../components/icons/CalendarIcon";
 
 const eventFormSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
@@ -111,42 +113,7 @@ export function EventForm({
               error={errors.date?.message}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M2.5 7.5H17.5"
-                  stroke="#8570AD"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M6.9 1.7V4.3"
-                  stroke="#8570AD"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M13.1 1.7V4.3"
-                  stroke="#8570AD"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M5.5 2.5H14.5C16.5 2.5 17.5 3.5 17.5 5.5V14.5C17.5 16.5 16.5 17.5 14.5 17.5H5.5C3.5 17.5 2.5 16.5 2.5 14.5V5.5C2.5 3.5 3.5 2.5 5.5 2.5Z"
-                  stroke="#8570AD"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <CalendarIcon/>
             </div>
           </div>
         </div>
@@ -163,28 +130,7 @@ export function EventForm({
               error={errors.time?.message}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10 18.3333C14.6024 18.3333 18.3333 14.6024 18.3333 10C18.3333 5.39763 14.6024 1.66667 10 1.66667C5.39763 1.66667 1.66667 5.39763 1.66667 10C1.66667 14.6024 5.39763 18.3333 10 18.3333Z"
-                  stroke="#8570AD"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M10 5V10H13.3333"
-                  stroke="#8570AD"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <ClockIcon/>
             </div>
           </div>
         </div>
@@ -236,25 +182,15 @@ export function EventForm({
             <div className="flex items-center gap-3">
               <div className="bg-[#F4F4F5] p-4 rounded-full">
                 <svg
-                  width="22"
-                  height="22"
-                  viewBox="0 0 22 22"
+                  width="23"
+                  height="24"
+                  viewBox="0 0 23 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M14.6667 14.6667L11 11M11 11L7.33333 14.6667M11 11V19.25"
-                    stroke="#242565"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M18.3333 16.5H19.25C20.7228 16.5 21.9167 15.3061 21.9167 13.8333V5.5C21.9167 4.02724 20.7228 2.83333 19.25 2.83333H2.75C1.27724 2.83333 0.0833333 4.02724 0.0833333 5.5V13.8333C0.0833333 15.3061 1.27724 16.5 2.75 16.5H3.66667"
-                    stroke="#242565"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    d="M11.0684 12.5404L14.9816 16.4536L13.6772 17.758L11.9908 16.0723V21.2237H10.146V16.0705L8.45956 17.758L7.15514 16.4536L11.0684 12.5404ZM11.0684 2.77637C14.3828 2.77637 17.114 5.27378 17.4827 8.48947C19.6333 9.07756 21.2145 11.0459 21.2145 13.3836C21.2145 16.0297 19.1886 18.2026 16.6032 18.436L16.6034 16.579C18.1675 16.3549 19.3697 15.0096 19.3697 13.3836C19.3697 11.6007 17.9244 10.1553 16.1414 10.1553C15.9488 10.1553 15.7602 10.1722 15.5776 10.2051C15.6448 9.8917 15.6803 9.56645 15.6803 9.23294C15.6803 6.6859 13.6154 4.6211 11.0684 4.6211C8.52137 4.6211 6.45657 6.6859 6.45657 9.23294C6.45657 9.56645 6.49197 9.8917 6.55992 10.2045C6.37661 10.1722 6.18797 10.1553 5.99539 10.1553C4.21245 10.1553 2.7671 11.6007 2.7671 13.3836C2.7671 14.9519 3.88539 16.259 5.36805 16.551L5.53425 16.5792L5.53456 18.436C2.94877 18.2032 0.922363 16.0301 0.922363 13.3836C0.922363 11.0459 2.50352 9.07756 4.65471 8.48962C5.02285 5.27378 7.75398 2.77637 11.0684 2.77637Z"
+                    fill="#242565"
                   />
                 </svg>
               </div>
