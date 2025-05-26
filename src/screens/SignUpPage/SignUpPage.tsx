@@ -7,17 +7,11 @@ import { Input } from "../../components/ui/input";
 import { useAuth } from "../../contexts/AuthContext";
 import { LogoHeader } from "../../components/LogoHeader";
 
-const signUpSchema = z
-  .object({
-    name: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
+const signUpSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
 
 type SignUpFormData = z.infer<typeof signUpSchema>;
 
@@ -44,105 +38,222 @@ export const SignUpPage = () => {
   return (
     <div>
       <LogoHeader />
-      <div className="min-h-screen bg-[#f9faff] flex items-center justify-center relative pb-[167px]">
-        <div
-          className="absolute w-[492.69px] h-[601px] bg-white rounded-bl-[4.93px] 
-        shadow-[0px_9.85px_19.71px_rgba(0,0,0,0.08)] drop-shadow-[0px_0px_4.93px_rgba(0,0,0,0.04)]"
+      <div className="min-h-screen bg-[#ECEEFF] flex items-center justify-center relative pb-[167px]">
+        <svg
+          width={493}
+          height={601}
+          viewBox="0 0 493 601"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute"
+          style={{
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            filter:
+              "drop-shadow(0px 0px 4.93px rgba(0,0,0,0.04)) drop-shadow(0px 9.85px 19.71px rgba(0,0,0,0.08))",
+          }}
         >
-          <h1 className="text-[29.56px] font-semibold text-[#242565] mt-[38.18px] ml-[29.56px]">
-            Sign Up
-          </h1>
-          <p className="text-[#8570AD] text-[19.7px] font-medium mt-[20px] ml-[29.56px]">
-            Already have an account?{" "}
-            <button
-              variant="link"
-              onClick={() => navigate("/signin")}
-              className="ml-2 underline text-[#8570AD]"
-            >
-              Sign In
-            </button>
-          </p>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="absolute left-[29.56px] space-y-6"
+          <defs>
+            <clipPath id="signup-clip">
+              <path
+                d="M493 580.79L472.79 601H4C1.79086 601 0 599.209 0 597V20.6904L20.6914 0H493V580.79Z"
+                fill="white"
+              />
+            </clipPath>
+          </defs>
+          <foreignObject
+            x="0"
+            y="0"
+            width="493"
+            height="601"
+            clipPath="url(#signup-clip)"
           >
-            <div className="mt-[20px]">
-              <label className="block text-[#242565] font-medium text-[19.08px] mb-2">
-                Full Name
-              </label>
-              <Input
-                {...register("name")}
-                placeholder="Full Name"
-                className="w-full"
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-[#242565] font-medium text-[19.08px] mb-2">
-                Email
-              </label>
-              <Input
-                {...register("email")}
-                type="email"
-                placeholder="Email"
-                className="w-full"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.email.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-[#242565] font-medium text-[19.08px] mb-2">
-                Password
-              </label>
-              <Input
-                {...register("password")}
-                type="password"
-                placeholder="Password"
-                className="w-full"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-[#242565] font-medium text-[19.08px] mb-2">
-                Confirm Password
-              </label>
-              <Input
-                {...register("confirmPassword")}
-                type="password"
-                placeholder="Confirm Password"
-                className="w-full"
-              />
-              {errors.confirmPassword && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
-            </div>
-
-            <Button
-              type="submit"
-              className="w-[433.56px] h-[49.27px] mt-[30px] rounded-[7.39px] 
-              bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white 
-              text-[18.91px] font-semibold shadow-[inset_0_-3.62px_1.61px_#4D3DEA,inset_0_3.22px_3.34px_rgba(255,255,255,0.25)]"
+            <div
+              style={{
+                position: "relative",
+                width: "492.69px",
+                height: "601px",
+                background: "#fff",
+                borderRadius: "0px 0px 0px 4.93px",
+                overflow: "hidden",
+                fontFamily: "Geist, Inter, sans-serif",
+              }}
             >
-              Sign Up
-            </Button>
-          </form>
-        </div>
+              <h1
+                style={{
+                  position: "absolute",
+                  left: "29.56px",
+                  top: "38.18px",
+                  fontWeight: 600,
+                  fontSize: "29.56px",
+                  lineHeight: "100%",
+                  letterSpacing: "-0.05em",
+                  color: "#242565",
+                  width: "102.23px",
+                  height: "30px",
+                }}
+              >
+                Sign Up
+              </h1>
+              <div
+                style={{
+                  position: "absolute",
+                  left: "29.56px",
+                  top: "97.31px",
+                  width: "auto",
+                  height: "28px",
+                  fontWeight: 500,
+                  fontSize: "19.71px",
+                  lineHeight: "140%",
+                  letterSpacing: "-0.05em",
+                  color: "#8570AD",
+                  display: "flex",
+                  alignItems: "center",
+                  whiteSpace: "nowrap",
+                  gap: "10px",
+                }}
+              >
+                <span>Already have an account?</span>
+                <button
+                  type="button"
+                  onClick={() => navigate("/signin")}
+                  style={{
+                    textDecoration: "underline",
+                    color: "#8570AD",
+                    fontWeight: 500,
+                    fontSize: "19.71px",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                >
+                  Sign In
+                </button>
+              </div>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                style={{
+                  position: "absolute",
+                  left: "0px",
+                  top: "140px",
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  gap: "24px",
+                  paddingLeft: "29.56px",
+                  paddingRight: "29.56px",
+                }}
+              >
+                {/* Name Field */}
+                <div style={{ width: "433.56px" }}>
+                  <label
+                    style={{
+                      fontWeight: 500,
+                      fontSize: "19.08px",
+                      letterSpacing: "-0.05em",
+                      color: "#242565",
+                      marginBottom: "8px",
+                      display: "block",
+                    }}
+                  >
+                    Full Name
+                  </label>
+                  <Input
+                    {...register("name")}
+                    placeholder="Full Name"
+                    className="w-[433.56px] h-[49.56px] px-[19.71px] py-[14.78px] border border-[#D9D9D9] rounded-[9.54px] text-[#B3B3B3] text-[16px]"
+                  />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.name.message}
+                    </p>
+                  )}
+                </div>
+                {/* Email Field */}
+                <div style={{ width: "433.56px" }}>
+                  <label
+                    style={{
+                      fontWeight: 500,
+                      fontSize: "19.08px",
+                      letterSpacing: "-0.05em",
+                      color: "#242565",
+                      marginBottom: "8px",
+                      display: "block",
+                    }}
+                  >
+                    Email
+                  </label>
+                  <Input
+                    {...register("email")}
+                    type="email"
+                    placeholder="Email"
+                    className="w-[433.56px] h-[49.56px] px-[19.71px] py-[14.78px] border border-[#D9D9D9] rounded-[9.54px] text-[#B3B3B3] text-[16px]"
+                  />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+                {/* Password Field */}
+                <div style={{ width: "433.56px" }}>
+                  <label
+                    style={{
+                      fontWeight: 500,
+                      fontSize: "19.08px",
+                      letterSpacing: "-0.05em",
+                      color: "#242565",
+                      marginBottom: "8px",
+                      display: "block",
+                    }}
+                  >
+                    Password
+                  </label>
+                  <Input
+                    {...register("password")}
+                    type="password"
+                    placeholder="Password"
+                    className="w-[433.56px] h-[49.56px] px-[19.71px] py-[14.78px] border border-[#D9D9D9] rounded-[9.54px] text-[#B3B3B3] text-[16px]"
+                  />
+                  {errors.password && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+                {/* Submit Button */}
+                <button
+                  type="submit"
+                  style={{
+                    width: "433.56px",
+                    height: "49.27px",
+                    background:
+                      "linear-gradient(180deg, #7B8BFF 0%, #4157FE 100%)",
+                    boxShadow:
+                      "inset 0px -3.62px 1.61px #4D3DEA, inset 0px 3.22px 3.34px rgba(255,255,255,0.25)",
+                    borderRadius: "7.39px",
+                    color: "#fff",
+                    fontWeight: 600,
+                    fontSize: "18.91px",
+                    letterSpacing: "-0.02em",
+                    lineHeight: "104.3%",
+                    border: "none",
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  Sign Up
+                </button>
+              </form>
+            </div>
+          </foreignObject>
+        </svg>
       </div>
     </div>
   );

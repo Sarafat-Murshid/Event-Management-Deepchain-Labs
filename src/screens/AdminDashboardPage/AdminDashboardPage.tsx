@@ -3,38 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Footer } from "../../components/Footer";
 import { EventFormModal } from "../../components/EventFormModal";
-import { EyeIcon,EditIcon, TrashIcon } from "lucide-react";
+import { useEventContext } from "../../contexts/EventContext";
+import type { Event } from "../../types/Event";
+import { EyeIcon } from "../../components/icons/EyeIcon";
+import { EditIcon } from "../../components/icons/EditIcon";
+import { TrashIcon } from "../../components/icons/TrashIcon";
 
 export const AdminDashboardPage = () => {
   const navigate = useNavigate();
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      title: "Tech Conference 2025",
-      date: "Sunday, 14 April, 2025",
-      location: "San Francisco, CA",
-      registrations: "130/500",
-      capacity: 500,
-      description: "A tech conference",
-      time: "09:00 AM - 05:00 PM",
-      tags: ["tech", "conference"],
-    },
-    {
-      id: 2,
-      title: "Startup Meetup",
-      date: "Monday, 20 May, 2025",
-      location: "New York, NY",
-      registrations: "80/200",
-      capacity: 200,
-      description: "A startup meetup",
-      time: "06:00 PM - 09:00 PM",
-      tags: ["startup", "networking"],
-    },
-  ]);
-
+  const { events, addEvent, editEvent, deleteEvent } = useEventContext();
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [currentEvent, setCurrentEvent] = useState(null);
+  const [currentEvent, setCurrentEvent] = useState<Event | null>(null);
 
   useEffect(() => {
     if (localStorage.getItem("isAdmin") !== "true") {
@@ -42,40 +22,34 @@ export const AdminDashboardPage = () => {
     }
   }, [navigate]);
 
-  const handleCreateEvent = (data) => {
-    const newEvent = {
+  const handleCreateEvent = (data: Omit<Event, "id" | "registrations">) => {
+    const newEvent: Event = {
       ...data,
-      id: events.length + 1,
+      id: Date.now(),
       registrations: `0/${data.capacity}`,
+      imageUrl:
+        data.imageUrl ||
+        data.image ||
+        "https://via.placeholder.com/400x200?text=No+Image",
     };
-    setEvents([...events, newEvent]);
+    addEvent(newEvent);
     setIsCreateModalOpen(false);
   };
 
-  const handleEditEvent = (data) => {
-    const updated = events.map((e) =>
-      e.id === currentEvent.id
-        ? {
-            ...e,
-            ...data,
-            registrations: `${e.registrations?.split("/")[0] || 0}/${
-              data.capacity
-            }`,
-          }
-        : e
-    );
-    setEvents(updated);
+  const handleEditEvent = (data: Partial<Event>) => {
+    if (!currentEvent) return;
+    editEvent({ ...currentEvent, ...data });
     setIsEditModalOpen(false);
     setCurrentEvent(null);
   };
 
-  const handleDeleteEvent = (id) => {
+  const handleDeleteEvent = (id: number) => {
     if (confirm("Are you sure you want to delete this event?")) {
-      setEvents(events.filter((e) => e.id !== id));
+      deleteEvent(id);
     }
   };
 
-  const openEditModal = (event) => {
+  const openEditModal = (event: Event) => {
     setCurrentEvent(event);
     setIsEditModalOpen(true);
   };
@@ -83,7 +57,17 @@ export const AdminDashboardPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#fafaff]">
       <header className="w-full h-[60px] bg-[#ffffff1a] backdrop-blur-[32px] flex items-center justify-between px-[102px]">
-        <div className="flex items-center gap-[8.09px]">
+        <button
+          className="flex items-center gap-[8.09px] focus:outline-none"
+          onClick={() => navigate("/")}
+          style={{
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+          }}
+          aria-label="Go to home"
+        >
           <img
             className="w-[26.96px] h-[26.96px]"
             alt="Ticket icon"
@@ -92,7 +76,7 @@ export const AdminDashboardPage = () => {
           <div className="text-[27px] tracking-[-1.35px] leading-[27px] font-bold text-[#240a62] whitespace-nowrap">
             Event buddy.
           </div>
-        </div>
+        </button>
         <div className="flex items-center gap-4">
           <span className="font-medium text-base text-[#242565]">
             Hello, Admin
@@ -147,9 +131,14 @@ export const AdminDashboardPage = () => {
                 <div className="flex-[3]">{event.title}</div>
                 <div className="flex-[3]">{event.date}</div>
                 <div className="flex-[2]">{event.location}</div>
-                <div className="flex-[2]">{event.registrations}</div>
+                <div className="flex-[2]">
+                  {event.registrations ?? `0/${event.capacity ?? 0}`}
+                </div>
                 <div className="flex-[1] flex gap-4">
-                  <button title="View">
+                  <button
+                    title="View"
+                    onClick={() => navigate(`/events/${event.id}`)}
+                  >
                     <EyeIcon />
                   </button>
                   <button title="Edit" onClick={() => openEditModal(event)}>
@@ -159,7 +148,7 @@ export const AdminDashboardPage = () => {
                     title="Delete"
                     onClick={() => handleDeleteEvent(event.id)}
                   >
-                    <TrashIcon color="#FF0E12" />
+                    <TrashIcon />
                   </button>
                 </div>
               </div>
@@ -186,7 +175,7 @@ export const AdminDashboardPage = () => {
           setCurrentEvent(null);
         }}
         onSubmit={handleEditEvent}
-        event={currentEvent}
+        event={currentEvent as Event}
         title="Edit Event"
         isEditing
       />
@@ -221,4 +210,3 @@ const LogoutIcon = () => (
     />
   </svg>
 );
-

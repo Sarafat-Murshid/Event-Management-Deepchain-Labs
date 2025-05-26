@@ -1,42 +1,41 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { useAuth } from "../../contexts/AuthContext";
 import { Footer } from "../../components/Footer";
+import { useEventContext } from "../../contexts/EventContext";
 
 export const DashboardPage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { events } = useEventContext();
 
   if (!user) {
     navigate("/signin");
     return null;
   }
 
-  const events = [
-    {
-      id: 1,
-      title: "Tech Conference 2025",
-      date: { month: "APR", day: "14" },
-      time: "3-5 PM",
-      day: "Sunday",
-      location: "San Francisco, CA",
-    },
-    {
-      id: 2,
-      title: "Tech Conference 2025",
-      date: { month: "APR", day: "14" },
-      time: "3-5 PM",
-      day: "Sunday",
-      location: "San Francisco, CA",
-    },
-  ];
+  // Filter events based on user's registrations if you track them
+  // For now, show all upcoming events as an example:
+  const now = new Date();
+  const registeredEvents = events.filter(
+    (event) => new Date(event.date) >= now
+  );
 
   return (
     <div className="min-h-screen flex flex-col bg-[#fafaff]">
       {/* Header */}
       <header className="w-full h-[60px] bg-[#ffffff1a] backdrop-blur-[32px] flex items-center justify-between px-[102px]">
-        <div className="flex items-center gap-[8.09px]">
+        <button
+          className="flex items-center gap-[8.09px] focus:outline-none"
+          onClick={() => navigate("/")}
+          style={{
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+          }}
+          aria-label="Go to home"
+        >
           <img
             className="w-[26.96px] h-[26.96px]"
             alt="Ticket icon"
@@ -45,7 +44,7 @@ export const DashboardPage = () => {
           <div className="[text-shadow:0px_3.89px_3.07px_#8b60dd21] text-[27px] tracking-[-1.35px] leading-[27px] font-gilroy font-bold text-[#240a62] whitespace-nowrap">
             Event buddy.
           </div>
-        </div>
+        </button>
 
         <div className="flex items-center gap-4">
           <span className="font-geist font-medium text-[16px] leading-[104.3%] tracking-[-0.05em] text-[#242565]">
@@ -108,61 +107,76 @@ export const DashboardPage = () => {
           </h2>
 
           <div className="mt-4 space-y-4">
-            {events.map((event) => (
-              <div
-                key={event.id}
-                onClick={() => navigate(`/event/${event.id}`)}
-                className="w-full h-[123px] bg-white border border-[#BDBBFB59] rounded-xl px-6 py-[22px] flex items-center cursor-pointer"
-              >
-                {/* Date Display */}
-                <div className="mr-8 text-center">
-                  <div className="text-[24.55px] font-geist font-bold text-[#3D37F1] tracking-[-0.05em]">
-                    {event.date.month}
-                  </div>
-                  <div className="text-[49.11px] font-geist font-bold leading-[64px] tracking-[-0.05em]">
-                    {event.date.day}
-                  </div>
-                </div>
+            {registeredEvents.map((event) => {
+              const dateObj = new Date(event.date);
+              const month = dateObj
+                .toLocaleString("default", { month: "short" })
+                .toUpperCase();
+              const day = dateObj.getDate();
+              const weekday = dateObj.toLocaleString("default", {
+                weekday: "long",
+              });
+              const time = dateObj.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              });
 
-                {/* Event Details */}
-                <div className="flex-1">
-                  <h3 className="text-[20px] font-geist font-medium leading-[120%] tracking-[-0.05em] text-[#242565] mb-5">
-                    {event.title}
-                  </h3>
-                  <div className="flex items-center gap-10 text-[16.08px] font-geist text-[#6A6A6A]">
-                    <div className="flex items-center gap-1">
-                      <CalendarIcon className="w-[18px] h-[18px] text-[#8570AD]" />
-                      <span>{event.day}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <ClockIcon className="w-[18px] h-[18px] text-[#8570AD]" />
-                      <span>{event.time}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <LocationIcon className="w-[18px] h-[18px] text-[#8570AD]" />
-                      <span>{event.location}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Cancel Registration Button */}
-                <Button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // Handle cancellation
-                  }}
-                  className="w-[156px] h-[38px] bg-gradient-to-b from-[#FF847B] to-[#FE4141] text-white font-geist font-semibold text-[15.35px] leading-[104.3%] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#EA3D3D,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)] rounded-md"
+              return (
+                <div
+                  key={event.id}
+                  onClick={() => navigate(`/events/${event.id}`)}
+                  className="w-full h-[123px] bg-white border border-[#BDBBFB59] rounded-xl px-6 py-[22px] flex items-center cursor-pointer"
                 >
-                  Cancel registration
-                </Button>
-              </div>
-            ))}
+                  {/* Date Display */}
+                  <div className="mr-8 text-center">
+                    <div className="text-[24.55px] font-geist font-bold text-[#3D37F1] tracking-[-0.05em]">
+                      {month}
+                    </div>
+                    <div className="text-[49.11px] font-geist font-bold leading-[64px] tracking-[-0.05em]">
+                      {day}
+                    </div>
+                  </div>
+
+                  {/* Event Details */}
+                  <div className="flex-1">
+                    <h3 className="text-[20px] font-geist font-medium leading-[120%] tracking-[-0.05em] text-[#242565] mb-5">
+                      {event.title}
+                    </h3>
+                    <div className="flex items-center gap-10 text-[16.08px] font-geist text-[#6A6A6A]">
+                      <div className="flex items-center gap-1">
+                        <CalendarIcon className="w-[18px] h-[18px] text-[#8570AD]" />
+                        <span>{weekday}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <ClockIcon className="w-[18px] h-[18px] text-[#8570AD]" />
+                        <span>{time}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <LocationIcon className="w-[18px] h-[18px] text-[#8570AD]" />
+                        <span>{event.location}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Cancel Registration Button */}
+                  <Button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      // Handle cancellation
+                    }}
+                    className="w-[156px] h-[38px] bg-gradient-to-b from-[#FF847B] to-[#FE4141] text-white font-geist font-semibold text-[15.35px] leading-[104.3%] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#EA3D3D,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)] rounded-md"
+                  >
+                    Cancel registration
+                  </Button>
+                </div>
+              );
+            })}
           </div>
 
           <div className="mt-8 flex justify-center">
             <Button
               onClick={() => navigate("/")}
-              className="w-[168px] h-[38px] bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white font-geist font-semibold text-[15.35px] leading-[104.3%] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#4D3DEA,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)] rounded-md"
+              className="w-[168px] h-[38px] mb-10 bg-gradient-to-b from-[#7B8BFF] to-[#4157FE] text-white font-geist font-semibold text-[15.35px] leading-[104.3%] tracking-[-0.02em] shadow-[inset_0px_-2.94px_1.31px_#4D3DEA,inset_0px_2.61px_2.71px_rgba(255,255,255,0.25)] rounded-md"
             >
               Browse more events
             </Button>

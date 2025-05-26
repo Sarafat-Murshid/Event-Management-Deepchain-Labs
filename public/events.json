@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "AI Conference",
+    "date": "2025-06-01T18:00:00",
+    "location": "New York",
+    "description": "A conference about AI.",
+    "imageUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...", // base64 string
+    "tags": [
+      { "name": "Tech", "color": "#4157FE" },
+      { "name": "AI", "color": "#4157FE" }
+    ],
+    "capacity": 100,
+    "registrations": "0/100"
+  }
+]

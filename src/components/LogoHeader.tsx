@@ -1,8 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 export const LogoHeader = () => (
-  <header className="w-full h-[60px] bg-[#ffffff1a] backdrop-blur-[32px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(32px)_brightness(100%)] flex items-center px-[102px]">
+  <header className="w-full h-[60px] bg-[#ECEEFF]/80 flex items-center px-[102px]">
     <Link to="/" className="flex items-center gap-[8.09px]">
       <img
         className="w-[26.96px] h-[26.96px]"

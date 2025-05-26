@@ -6,7 +6,7 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Select } from "./ui/select";
 import { Button } from "./ui/button";
-import { Event } from "../types/event";
+import { Event } from "../types/Event";
 
 // Schema for form validation
 const eventFormSchema = z.object({
@@ -62,6 +62,9 @@ export function EventForm({
   const [imagePreview, setImagePreview] = React.useState<string | null>(
     event?.imageUrl || null
   );
+  const [base64Image, setBase64Image] = React.useState<string | null>(
+    event?.imageUrl || null
+  );
 
   // Capacity options
   const capacityOptions = Array.from({ length: 20 }, (_, i) => {
@@ -75,13 +78,21 @@ export function EventForm({
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
+        setBase64Image(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
   };
 
+  const handleFormSubmit = (data: any) => {
+    onSubmit({
+      ...data,
+      imageUrl: base64Image,
+    });
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-5">
       <Input
         label="Title"
         placeholder="Event title"

@@ -1,9 +1,9 @@
 import { CalendarIcon, ClockIcon, MapPinIcon } from "lucide-react";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Badge } from "../../../../components/ui/badge";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { Separator } from "../../../../components/ui/separator";
+import { ChairIcon } from './../../../../components/icons/ChairIcon';
 
 export const EventCardSection = (): JSX.Element => {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export const EventCardSection = (): JSX.Element => {
   ];
 
   return (
-    <Card 
+    <Card
       className="w-[400px] shadow-[0px_21.77px_54.43px_#7772aa1a] bg-[url(/body.svg)] bg-[100%_100%] relative cursor-pointer hover:shadow-lg transition-shadow"
       onClick={() => navigate(`/event/1`)}
     >
@@ -90,12 +90,8 @@ export const EventCardSection = (): JSX.Element => {
 
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-1.5">
-            <div className="relative w-[17.89px] h-[17.89px]">
-              <img
-                className="absolute w-3 h-[15px] top-px left-[3px]"
-                alt="Group"
-                src="/group-5.png"
-              />
+            <div className="relative w-[17.89px] h-[17.89px] flex items-center justify-center">
+              <ChairIcon className="w-3 h-[15px]" />
             </div>
             <span className="font-medium text-[13.9px] text-[#8570ad] tracking-[-0.70px] leading-[20.9px]">
               20 Spots Left
